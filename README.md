@@ -1,5 +1,7 @@
 # Forge DEX Analytics Dashboard
 
+https://github.com/LPX55/Forge-Analytics/assets/16395727/0b684819-291d-4688-983c-c7ebba2efa4e
+
 ## Calculation Breakdown
 
 ### 1. Calculate deposit amount of token0 and token1
