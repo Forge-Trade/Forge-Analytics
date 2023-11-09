@@ -1,6 +1,6 @@
 # Forge DEX Analytics Dashboard
 
-https://github.com/LPX55/Forge-Analytics/assets/16395727/0b684819-291d-4688-983c-c7ebba2efa4e
+https://github.com/Forge-Trade/Forge-Analytics/assets/16395727/377b525c-3f2d-4ef2-9f55-f79ab5934c8a
 
 ## Calculation Breakdown
 
