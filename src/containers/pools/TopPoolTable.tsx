@@ -945,6 +945,24 @@ const TopPoolTable = ({ isLoading, pools, tokens }: TopPoolTableProps) => {
         );
       },
     },
+    {
+      title: "",
+      key: "action",
+      fixed: isTablet ? false : "right",
+      width: 40,
+      render: (_, { token0, token1, feeTier }) => (
+        <a
+          target="_blank"
+          href={`/?network=${
+            poolContext.state.chain?.id || NETWORKS[0].id
+          }&token0=${token0.id}&token1=${token1.id}&feeTier=${feeTier}`}
+        >
+          <Button style={{ fontSize: "0.875rem" }}>
+          <FontAwesomeIcon icon={faExternalLinkAlt} />
+          </Button>
+        </a>
+      ),
+    },
   ];
 
   return (

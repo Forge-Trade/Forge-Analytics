@@ -140,7 +140,26 @@ function App() {
       <SelectPairModal />
       <ImpermanentLossModal />
       <CreatePositionModal />
+      (process.env.NODE_ENV === "development") {
 
+      <FeedbackButton
+        onClick={() => {
+          const app_context = {
+            token0: state.token0?.id,
+            token1: state.token1?.id,
+            chain: getCurrentNetwork().id,
+            pool: state.pool?.id,
+            depositAmount: state.depositAmountValue,
+            priceRange: state.priceRangeValue,
+            mostActivePrice: state.priceAssumptionValue,
+          };
+            return console.log({ app_context });
+          }
+        }
+      >
+        <FontAwesomeIcon icon={faBug} />
+      </FeedbackButton>
+      }
 
       {!state.pool && (
         <HomeContainer>

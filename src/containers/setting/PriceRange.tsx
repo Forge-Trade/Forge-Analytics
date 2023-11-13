@@ -75,12 +75,20 @@ const PriceRange = () => {
     setActivePriceAssumptionSlider(
       (100 * (state.priceAssumptionValue - min)) / (max - min)
     );
+    console.log((100 * (state.priceAssumptionValue - min)) / (max - min))
+
   }, [state.priceAssumptionValue, min, max]);
   useEffect(() => {
     setPriceRangeSlider([
       (100 * (state.priceRangeValue[0] - min)) / (max - min),
       (100 * (state.priceRangeValue[1] - min)) / (max - min),
     ]);
+    console.log((100 * (state.priceRangeValue[0] - min)) / (max - min));
+    console.log((100 * (state.priceRangeValue[1] - min)) / (max - min));
+    // dispatch({
+    //   type: AppActionType.UPDATE_PRICE_RANGE,
+    //   payload: [(100 * (state.priceRangeValue[0] - min)) / (max - min), (100 * (state.priceRangeValue[1] - min)) / (max - min)],
+    // });
   }, [state.priceRangeValue, min, max]);
 
   return (
