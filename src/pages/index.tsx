@@ -164,8 +164,6 @@ const Landing = styled.div`
 
 function App() {
   const { state } = useAppContext();
-  const pathName = getPath();
-  console.log(pathName)
 
   return (
     <>

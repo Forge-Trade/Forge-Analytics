@@ -6,7 +6,6 @@ export const setQueryParam = (key: string, value: string) => {
 
 export const getQueryParam = (key: string): string => {
   const url = new URL(window.location.href);
-  console.log(url)
   return url.searchParams.get(key) || "";
 };
 
