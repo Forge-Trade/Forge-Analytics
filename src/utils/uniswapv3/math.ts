@@ -169,7 +169,7 @@ export const getPositionTokensDepositRatio = (
   Pl: number,
   Pu: number
 ): number => {
-  const deltaL = 1000; // can be any number
+  const deltaL = 5000; // can be any number
 
   let deltaY = deltaL * (Math.sqrt(P) - Math.sqrt(Pl));
   if (P < Pl) deltaY = 0;

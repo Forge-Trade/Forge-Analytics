@@ -6,6 +6,7 @@ export const setQueryParam = (key: string, value: string) => {
 
 export const getQueryParam = (key: string): string => {
   const url = new URL(window.location.href);
+  console.log(url)
   return url.searchParams.get(key) || "";
 };
 
@@ -14,3 +15,8 @@ export const deleteQueryParam = (key: string) => {
   url.searchParams.delete(key);
   window.history.pushState({}, "", url.toString());
 };
+
+export const getPath =  () => {
+  const url = new URL(window.location.href);
+  return url.pathname;
+  };

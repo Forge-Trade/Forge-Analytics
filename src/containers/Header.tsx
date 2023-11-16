@@ -12,6 +12,7 @@ import { AppActionType } from "../context/app/appReducer";
 import { useModalContext } from "../context/modal/modalContext";
 import { ModalActionType } from "../context/modal/modalReducer";
 import { ScreenWidth } from "../utils/styled";
+import { Link, navigate } from "gatsby";
 
 const InvisibleMobileSpan = styled.span`
   @media only screen and (max-width: 430px) {

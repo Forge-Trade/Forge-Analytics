@@ -40,7 +40,7 @@ const Container = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 16px;
-
+  max-width: 1300px;
   @media only screen and (max-width: ${ScreenWidth.MOBILE}px) {
     padding: 12px;
     border-radius: 12px;

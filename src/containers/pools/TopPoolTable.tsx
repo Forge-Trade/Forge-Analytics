@@ -32,6 +32,7 @@ import { usePoolContext } from "../../context/pool/poolContext";
 import { PoolActionType } from "../../context/pool/poolReducer";
 import { NETWORKS } from "../../common/network";
 import { ScreenWidth } from "../../utils/styled";
+import { navigate, Link } from "gatsby"
 
 const PairToken = styled.div`
   display: flex;
@@ -694,7 +695,7 @@ const TopPoolTable = ({ isLoading, pools, tokens }: TopPoolTableProps) => {
                     <div>Weekly</div>
                     <div>{formatDollarAmount(record.estimatedFee24h * 7)}</div>
                     <div>
-                      {((100 * (record.estimatedFee24h * 7)) / 1000).toFixed(2)}
+                      {((100 * (record.estimatedFee24h * 7)) / 5000).toFixed(2)}
                       %
                     </div>
                   </div>
@@ -702,7 +703,7 @@ const TopPoolTable = ({ isLoading, pools, tokens }: TopPoolTableProps) => {
                     <div>Monthly</div>
                     <div>{formatDollarAmount(record.estimatedFee24h * 30)}</div>
                     <div>
-                      {((100 * (record.estimatedFee24h * 30)) / 1000).toFixed(
+                      {((100 * (record.estimatedFee24h * 30)) / 5000).toFixed(
                         2
                       )}
                       %
@@ -714,7 +715,7 @@ const TopPoolTable = ({ isLoading, pools, tokens }: TopPoolTableProps) => {
                       {formatDollarAmount(record.estimatedFee24h * 365)}
                     </div>
                     <div>
-                      {((100 * (record.estimatedFee24h * 365)) / 1000).toFixed(
+                      {((100 * (record.estimatedFee24h * 365)) / 5000).toFixed(
                         2
                       )}
                       %
@@ -952,8 +953,7 @@ const TopPoolTable = ({ isLoading, pools, tokens }: TopPoolTableProps) => {
       width: 40,
       render: (_, { token0, token1, feeTier }) => (
         <a
-          target="_blank"
-          href={`/?network=${
+          href={`?network=${
             poolContext.state.chain?.id || NETWORKS[0].id
           }&token0=${token0.id}&token1=${token1.id}&feeTier=${feeTier}`}
         >

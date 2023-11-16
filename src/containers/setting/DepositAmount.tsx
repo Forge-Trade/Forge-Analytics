@@ -79,7 +79,7 @@ const DepositAmount = () => {
       <InputGroup>
         <Dollar>$</Dollar>
         <DepositInput
-          defaultValue={1000}
+          defaultValue={5000}
           type="number"
           placeholder="0.00"
           onChange={(e) => {

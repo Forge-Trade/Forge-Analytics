@@ -1,7 +1,4 @@
 module.exports = {
-  flags: {
-    DEV_SSR: true
-  },
   plugins: [
     "gatsby-plugin-fontawesome-css",
     {
@@ -22,5 +19,6 @@ module.exports = {
         },
       },
     },
+    "gatsby-plugin-transition-link",
   ],
 };

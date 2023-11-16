@@ -121,7 +121,7 @@ const TopPools = () => {
       let Pu = P + (P * priceVolatility24HPercentage) / 100;
       const priceUSDX = Number(pool.token1.tokenDayData[0].priceUSD);
       const priceUSDY = Number(pool.token0.tokenDayData[0].priceUSD);
-      const depositAmountUSD = 1000;
+      const depositAmountUSD = 5000;
       const { amount0, amount1 } = getTokensAmountFromDepositAmountUSD(
         P,
         Pl,

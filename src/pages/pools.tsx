@@ -15,9 +15,10 @@ import { PoolActionType } from "../context/pool/poolReducer";
 import { getQueryParam, setQueryParam } from "../utils/querystring";
 import { Network } from "../common/interfaces/uniswap.interface";
 import { SEO } from "../common/components/Head";
+import { useAppContext } from "../context/app/appContext";
 
 const BodyContainer = styled.div`
-  max-width: 1000px;
+  max-width: 860px;
   margin: auto;
   @media only screen and (max-width: ${ScreenWidth.TABLET}px) {
     margin: auto 15px;
@@ -74,6 +75,7 @@ const NetworkDropdownItem = styled.div`
 `;
 
 function PoolComp() {
+  const appContext = useAppContext();
   const poolContext = usePoolContext();
 
   useEffect(() => {
@@ -137,7 +139,7 @@ function PoolComp() {
     <>
       <BodyContainer>
 
-        {poolContext.state.chain && (
+        {poolContext.state.chain && !appContext.state.pool && (
           <>            
             <TopPools />
             <Br />

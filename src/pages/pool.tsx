@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation } from "@reach/router";
+
 import styled from "styled-components";
 import { Br, H2, Heading } from "../common/components/atomic";
 import CorrelationChart from "../containers/CorrelationChart";
@@ -21,19 +23,32 @@ import {
   faBug,
   faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { getCurrentNetwork } from "../common/network";
+import { NETWORKS, getCurrentNetwork } from "../common/network";
 import ImpermanentLossModal from "../containers/ImpermanentLossModal";
 import CreatePositionModal from "../containers/CreatePositionModal";
 import TopPosition from "../containers/TopPosition";
 import { Link } from "gatsby";
 import { SEO } from "../common/components/Head";
 import Pools from './pools';
-import { getPath } from "../utils/querystring";
+import { getPath, getQueryParam } from "../utils/querystring";
+import { useModalContext } from "../context/modal/modalContext";
+import { Network, Token, Pool } from "@/common/interfaces/uniswap.interface";
+import { getAvgTradingVolume, getPoolFromPair, getPoolTicks, getToken } from "../repos/uniswap";
+import { getPriceChart } from "@/repos/coingecko";
+import { getTickFromPrice } from "@/utils/uniswapv3/math";
+import { AppActionType } from "@/context/app/appReducer";
+const BodyContainer = styled.div`
+  max-width: 1300px;
+  margin: auto;
+  padding-top: 60px;
 
-
+  @media only screen and (max-width: ${ScreenWidth.TABLET}px) {
+    margin: auto 15px;
+    padding-top: 85px;
+  }
+`;
 const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
   grid-template-columns: 5fr 7fr;
   grid-gap: 25px;
   margin-top: 25px;
@@ -43,13 +58,22 @@ const ContentContainer = styled.div`
     grid-gap: 15px;
   }
 `;
-const BodyContainer = styled.div`
-max-width: 1200px;
-margin: auto;
-padding-top: 20px;
-padding-bottom: 20px;
+const HomeContainer = styled.div`
+  max-width: 1300px;
+  margin: auto;
+  padding-top: 80px;
 
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-gap: 16px;
+  margin-top: 25px;
 
+  & > .select-pair {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    position: relative;
+  }
 
   @media only screen and (max-width: 800px) {
     margin: auto 15px;
@@ -63,53 +87,7 @@ padding-bottom: 20px;
       margin: auto auto;
     }
   }
-  & .homeContainer{
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    & > .select-pair {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      position: relative;
-      min-width: 280px;
-    }
-  }
-  & .poolPos{
-
-    display: flex;
-    flex-direction: column;
-    }
-  & .poolCharts{
-    display: flex;
-    flex-direction: column;
-    flex: auto;
-  }
-  & .top-pools {
-    display: block;
-    color: #bbb;
-    cursor: pointer;
-    font-size: 0.875rem;
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.175);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    text-decoration: none;
-    transition: 0.3s;
-    margin-top: 18px;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    & > div:nth-child(1) {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-  }
-
 `;
-
 const Landing = styled.div`
   & p {
     color: #bbb;
@@ -162,19 +140,29 @@ const Landing = styled.div`
   }
 `;
 
-function App() {
-  const { state } = useAppContext();
-  const pathName = getPath();
-  console.log(pathName)
+function PoolPage() {
+    const { state } = useAppContext();
+    const appContext = useAppContext();
+    const modalContext = useModalContext();
+    const location = useLocation();
+    console.log(location)
+    const params = new URLSearchParams(location.search);
+    const network = params.get('network');
+    const token0 = params.get('token0');
+    const token1 = params.get('token1');
+    const feeTier = params.get('feeTier');
+    const pathName = getPath();
+    console.log(pathName)
+
+
 
   return (
     <>
-    <BodyContainer>
       <SelectPairModal />
       <ImpermanentLossModal />
       <CreatePositionModal />
 
-      {/* <FeedbackButton
+      <FeedbackButton
         onClick={() => {
           const app_context = {
             token0: state.token0?.id,
@@ -191,39 +179,22 @@ function App() {
       >
         <FontAwesomeIcon icon={faBug} />
       </FeedbackButton>
-       */}
 
-      {!state.pool && !state.token0 && (
-        
-          <>
-          <div className="homeContainer">
-            <Pools />
-            <div className="select-pair">
-              <SelectPair fetchFromUrlParams={true} />
-            </div>
-          </div>
-          </>
-        
-      )}
-
-      {state.pool && state.network && (
-        
-          <>
+      {state.pool && (
+        <BodyContainer>
           <Header />
-          <div className="poolPos">
           <ContentContainer>
-              <div>
-                <EstimatedFees />
-                <Br />
-                <Setting />
-              </div>
-              <div className="poolCharts">
-                <LiquidityPositionChart />
-                <Br />
-                <CorrelationChart />
-              </div>
-            </ContentContainer>
-          </div>
+            <div>
+              <EstimatedFees />
+              <Br />
+              <Setting />
+            </div>
+            <div>
+              <LiquidityPositionChart />
+              <Br />
+              <CorrelationChart />
+            </div>
+          </ContentContainer>
 
           {!state.network.disabledTopPositions && (
             <>
@@ -231,14 +202,13 @@ function App() {
               <TopPosition />
             </>
           )}
-        </>
+        </BodyContainer>
       )}
-      </BodyContainer>
     </>
   );
 }
 
-export default App;
+export default PoolPage;
 export const Head = () => {
   const title = "Forge DEX Analytics";
   const description =

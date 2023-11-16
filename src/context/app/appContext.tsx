@@ -35,7 +35,7 @@ const initialState: AppContextState = {
   network: NETWORKS[0],
   tokenList: [],
   isPairToggled: false,
-  isFullRange: false,
+  isFullRange: true,
 
   pool: null,
   poolTicks: null,
@@ -45,7 +45,7 @@ const initialState: AppContextState = {
   token1PriceChart: null,
   volume24H: 0,
 
-  depositAmountValue: 1000,
+  depositAmountValue: 5000,
   priceRangeValue: [0, 0],
   priceAssumptionValue: 0,
 

@@ -14,8 +14,9 @@ const GlobalStyle = createGlobalStyle`
       "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
+    overflow-x: clip;
 
     background-color: #0d0e0e;
   }
