@@ -575,12 +575,12 @@ const InstructionSection = ({ amount0, amount1 }: InstructionSectionProps) => {
               </Table>
             </div>
             <a
-              href={`https://app.uniswap.org/#/swap?exactField=input&exactAmount=${srcTokenSwapAmount}&inputCurrency=${
-                isNative(tokenA) ? "ETH" : tokenA?.id
-              }&outputCurrency=${isNative(tokenB) ? "ETH" : tokenB?.id}`}
+              href={`https://app.forge.trade/#/swap?exactField=input&exactAmount=${srcTokenSwapAmount}&inputCurrency=${
+                isNative(tokenA) ? "EVMOS" : tokenA?.id
+              }&outputCurrency=${isNative(tokenB) ? "EVMOS" : tokenB?.id}`}
               target="_blank"
             >
-              Swap on Uniswap V3
+              Swap on Forge DEX
             </a>
           </div>
         </li>

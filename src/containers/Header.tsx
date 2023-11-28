@@ -122,7 +122,7 @@ const Header = () => {
             href={`https://app.forge.trade/#/pools/${appContext.state.pool?.id}`}
             target="_blank"
             rel="noreferrer"
-            aria-label="Open in Uniswap"
+            aria-label="Open in Forge"
           >
             <FontAwesomeIcon icon={faExternalLinkAlt} />
           </a>

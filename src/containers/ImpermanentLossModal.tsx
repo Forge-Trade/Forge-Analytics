@@ -492,7 +492,7 @@ const ImpermanentLossModal = () => {
                       : ""
                   }`}
                 >
-                  Strategy B: Uniswap V3
+                  Strategy B: Forge
                 </span>
                 <span className="value">
                   <span className="p">
