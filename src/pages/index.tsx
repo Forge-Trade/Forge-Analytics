@@ -93,7 +93,7 @@ padding-bottom: 20px;
     padding: 15px;
     border: 1px solid rgba(255, 255, 255, 0.175);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border-radius: 6px;
     text-decoration: none;
     transition: 0.3s;
     margin-top: 18px;
@@ -124,7 +124,7 @@ const Landing = styled.div`
     padding: 15px;
     border: 1px solid rgba(255, 255, 255, 0.175);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border-radius: 6px;
     text-decoration: none;
     transition: 0.3s;
     margin-top: 18px;

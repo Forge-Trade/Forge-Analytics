@@ -35,7 +35,7 @@ const initialState: AppContextState = {
   network: NETWORKS[0],
   tokenList: [],
   isPairToggled: false,
-  isFullRange: true,
+  isFullRange: false,
 
   pool: null,
   poolTicks: null,
